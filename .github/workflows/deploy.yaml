@@ -40,7 +40,7 @@ jobs:
       run: terraform plan -out=tfplan
 
     - name: Apply Terraform deployment
-      if: envs.teffaform_apply
+      if: env.teffaform_apply
       run: terraform apply -auto-approve tfplan
     # Create SSH config file
     - name: Run create-ssh-config.sh
@@ -60,7 +60,7 @@ jobs:
 
     # Move the tfstate file to Artifacts directory
     - name: Move tfstate file to Artifacts directory
-      run: mv terraform.tfstate ./Artifacts/${{ envs.TFSTATE_FILE }}
+      run: mv terraform.tfstate ./Artifacts/${{ env.TFSTATE_FILE }}
 
     # Upload the entire Artifacts directory
     - name: Upload Artifacts directory as an artifact
