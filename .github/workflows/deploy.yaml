@@ -9,7 +9,7 @@ on:
     branches:
       - main
 
-envs:
+env:
   teffaform_apply: true
   deployment_tag: devops-challenge
 
@@ -52,7 +52,7 @@ jobs:
     - name: Generate unique tfstate filename
       id: generate_tfstate_name
       run: |
-        echo "TFSTATE_FILE=tfstate-${{ envs.deployment_tag }}.json" >> $GITHUB_ENV
+        echo "TFSTATE_FILE=tfstate-${{ env.deployment_tag }}.json" >> $GITHUB_ENV
 
     # Create Artifacts directory if it doesn't exist
     - name: Create Artifacts directory
