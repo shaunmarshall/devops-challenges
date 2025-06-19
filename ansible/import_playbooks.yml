@@ -1,0 +1,5 @@
+# Terraform will call this file, can add more playbooks hear
+# No need to update terraofrm code
+# Ensure the plybook yml is in same directory.
+---
+- import_playbook: ./setup_web_server.yml

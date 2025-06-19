@@ -1,0 +1,36 @@
+---
+- name: Install and configure Apache on Amazon Linux 2
+  hosts: all
+  become: true
+  vars:
+    ansible_python_interpreter: /usr/bin/python3.8
+  tasks:
+    # - name: Ensure python3.8 is installed
+    #   ansible.builtin.dnf:
+    #     name: python38
+    #     state: present
+    #     use_backend: dnf5
+    
+    - name: test cmd for httpd install
+      shell:
+        cmd: yum install httpd -y
+
+
+    # - name: Install httpd (Apache) package
+    #   yum:
+    #     name: httpd
+    #     state: present
+
+    - name: Start and enable the httpd service
+      service:
+        name: httpd
+        state: started
+        enabled: yes
+
+    - name: Copy index.html to /var/www/html
+      copy:
+        src: index.html
+        dest: /var/www/html/index.html
+        owner: apache
+        group: apache
+        mode: '0644'
