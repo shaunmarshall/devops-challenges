@@ -79,12 +79,12 @@ jobs:
     - name: Display Terraform Outputs
       id: terraform_outputs
       run: |
-        terraform output > terraform_outputs.txt
+        terraform output -json > terraform_outputs.json
         echo "Terraform Outputs:" >> $GITHUB_ENV
-        cat terraform_outputs.txt
-
+        cat terraform_outputs.json
+   
     # Set the output in the workflow summary
     - name: Set Outputs for Summary
       run: |
         echo "## Terraform Outputs" >> $GITHUB_ENV
-        terraform output  >> $GITHUB_ENV
+        terraform output -json | jq . >> $GITHUB_ENV
