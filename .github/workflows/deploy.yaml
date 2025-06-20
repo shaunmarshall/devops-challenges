@@ -47,7 +47,7 @@ jobs:
 
     - name: Plan Terraform deployment
       run: |
-        terraform plan -out=tfplan \
+        terraform plan \
           -var="allowed_ip_cidr=${{ env.ALLOWED_IPS }}" \
           -var="runner_ip_cidr=${{ env.RUNNER_IP }}"
 
@@ -55,7 +55,8 @@ jobs:
       if: env.teffaform_apply
       run: |
         terraform apply -auto-approve \
-          -var="allowed_ip_cidr=${{ env.ALLOWED_IPS }}" -var="runner_ip_cidr=${{ env.RUNNER_IP }}"
+          -var="allowed_ip_cidr=${{ env.ALLOWED_IPS }}" \
+          -var="runner_ip_cidr=${{ env.RUNNER_IP }}"
     
     # Create SSH config file
     - name: Run create-ssh-config.sh
@@ -64,19 +65,9 @@ jobs:
         chmod +x ./scripts/create-ssh-config.sh
         ./scripts/create-ssh-config.sh
 
-    # Generate a unique name for the tfstate file
-    - name: Generate unique tfstate filename
-      id: generate_tfstate_name
-      run: |
-        echo "TFSTATE_FILE=tfstate-${{ env.deployment_tag }}.json" >> $GITHUB_ENV
-
     # Create Artifacts directory if it doesn't exist
     - name: Create Artifacts directory
       run: mkdir -p ./Artifacts
-
-    # Move the tfstate file to Artifacts directory
-    - name: Move tfstate file to Artifacts directory
-      run: mv terraform.tfstate ./Artifacts/${{ env.TFSTATE_FILE }}
 
     # Upload the entire Artifacts directory
     - name: Upload Artifacts directory as an artifact
