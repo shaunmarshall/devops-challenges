@@ -12,6 +12,10 @@ The deployment will be secure and only allow access to IP addresses that are in 
 
 The deployment will create the SSH keys and upload them to AWS, add them to the VMs during deployment, as well as making them available as a workflow artifact. It will also create an SSH config file to simplify the proxy SSH via the Bastion Host.
 
+```bash
+ssh -F devops-challenge_ssh_config app-server-1
+```
+
 The workflow will fail on any stage errors. If the workflow is successful, it will display the terraform outputs as the last step.
 
 To access the web page, use the DNS value of the Application Load Balancer using the HTTP protocol.

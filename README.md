@@ -85,7 +85,7 @@ This will automatically approve the changes and apply them to your AWS environme
 ## Accessing the Web Page
 
 Terraform will output the DNS name value of the Application Load Balancer.
-Navigate to that URL using `http://` protocal
+Navigate to that URL using `http://` protocol
 
 
 ---
