@@ -6,8 +6,8 @@ variable "deployment_tag" {
 
 variable "allowed_ip_cidr" {
   description = "CIDR blocks allowed for SSH and WAF"
-  type        = list(string)
-  default     = ["82.43.64.101/32"]
+  type        = string
+  default     = "82.43.64.101/32"
 }
 
 variable "aws_region" {

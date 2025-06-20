@@ -47,12 +47,13 @@ jobs:
     - name: Plan Terraform deployment
       run: |
           terraform plan -out=tfplan \
-          -var="allowed_ip_cidr=\"[\"${{ env.ALLOWED_IPS }}\", \"${{ env.runner_ip }}\"]\""
+          -var="allowed_ip_cidr=\"${{ env.ALLOWED_IPS }}\""
 
     - name: Apply Terraform deployment
       if: env.teffaform_apply
       run: |
-        terraform apply -auto-approve tfplan -var="allowed_ip_cidr=\"[\"${{ env.ALLOWED_IPS }}\", \"${{ env.runner_ip }}\"]\""
+        terraform apply -auto-approve tfplan \
+        -var="allowed_ip_cidr=\"${{ env.ALLOWED_IPS }}\""
     
     # Create SSH config file
     - name: Run create-ssh-config.sh
