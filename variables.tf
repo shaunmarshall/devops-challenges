@@ -10,6 +10,11 @@ variable "allowed_ip_cidr" {
   default     = "82.43.64.101/32"
 }
 
+variable "runner_ip_cidr" {
+  description = "CIDR blocks allowed for SSH and WAF"
+  type        = string
+}
+
 variable "aws_region" {
   description = "AWS region to deploy into"
   type        = string

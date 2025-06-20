@@ -28,8 +28,7 @@ jobs:
         export RUNNER_IP="$(curl -s ifconfig.me)/32"
         echo "ALLOWED_IPS: $ALLOWED_IPS"
         echo "Runner IP: $RUNNER_IP"
-        echo "ALLOWED_IPS=\"$ALLOWED_IPS\",\"$RUNNER_IP\"" >> $GITHUB_ENV
-        #echo '''ALLOWED_IPS=$ALLOWED_IPS\\\",\\\"$RUNNER_IP"''' >> $GITHUB_ENV
+        echo "RUNNER_IP=$RUNNER_IP" >> $GITHUB_ENV
 
     - name: Set up AWS CLI
       uses: aws-actions/configure-aws-credentials@v2
@@ -48,14 +47,16 @@ jobs:
 
     - name: Plan Terraform deployment
       run: |
-          terraform plan -out=tfplan \
-          -var="allowed_ip_cidr=\"${{ env.ALLOWED_IPS }}\""
+        terraform plan -out=tfplan \
+          -var="allowed_ip_cidr=${{ env.ALLOWED_IPS }}" \
+          -var="runner_ip_cidr=${{ env.RUNNER_IP }}"
 
     - name: Apply Terraform deployment
       if: env.teffaform_apply
       run: |
         terraform apply -auto-approve tfplan \
-        -var="allowed_ip_cidr=\"${{ env.ALLOWED_IPS }}\""
+          -var="allowed_ip_cidr=${{ env.ALLOWED_IPS }}" \
+          -var="runner_ip_cidr=${{ env.RUNNER_IP }}"
     
     # Create SSH config file
     - name: Run create-ssh-config.sh
