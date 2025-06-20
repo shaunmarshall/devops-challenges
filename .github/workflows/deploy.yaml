@@ -45,7 +45,7 @@ jobs:
       run: terraform init 
 
     - name: Plan Terraform deployment
-      run: terraform plan -out=tfplan
+      run: terraform plan -out=tfplan -var="allowed_ip_cidr=${{ env.ALLOWED_IPS }}"
 
     - name: Apply Terraform deployment
       if: env.teffaform_apply
