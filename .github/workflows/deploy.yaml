@@ -11,7 +11,7 @@ on:
 
 env:
   ALLOWED_IPS: "82.43.64.101/32" 
-  terraform_apply: true
+  terraform_apply: false
   deployment_tag: devops-challenge
 
 jobs:
