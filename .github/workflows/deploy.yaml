@@ -28,8 +28,8 @@ jobs:
         export RUNNER_IP="$(curl -s ifconfig.me)/32"
         echo "ALLOWED_IPS: $ALLOWED_IPS"
         echo "Runner IP: $RUNNER_IP"
-        echo "ALLOWED_IPS=\\\"$ALLOWED_IPS\\\",\\\"$RUNNER_IP\\\"" >> $GITHUB_ENV
-        #echo "ALLOWED_IPS=$ALLOWED_IPS\",\"$RUNNER_IP\"" >> $GITHUB_ENV
+        echo "ALLOWED_IPS=\"$ALLOWED_IPS\",\"$RUNNER_IP\"" >> $GITHUB_ENV
+        #echo '''ALLOWED_IPS=$ALLOWED_IPS","$RUNNER_IP"''' >> $GITHUB_ENV
 
     - name: Set up AWS CLI
       uses: aws-actions/configure-aws-credentials@v2
