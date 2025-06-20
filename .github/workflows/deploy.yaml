@@ -27,7 +27,7 @@ jobs:
       run: |
         export RUNNER_IP="$(curl -s ifconfig.me)/32"
         echo "Runner IP: $RUNNER_IP"
-        echo "ALLOWED_IPS="\\\"$ALLOWED_IPS\\\",\\\"$RUNNER_IP\\\"" >> $GITHUB_ENV
+        echo "ALLOWED_IPS=\\\"$ALLOWED_IPS\\\",\\\"$RUNNER_IP\\\"" >> $GITHUB_ENV
         #echo "ALLOWED_IPS=\"$ALLOWED_IPS\",\"$RUNNER_IP\"" >> $GITHUB_ENV
 
     - name: Set up AWS CLI
