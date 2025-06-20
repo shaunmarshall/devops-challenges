@@ -4,6 +4,12 @@ variable "deployment_tag" {
   default     = "devops-challenge"
 } 
 
+variable "allowed_ip_cidr" {
+  description = "CIDR blocks allowed for SSH and WAF"
+  type        = list(string)
+  default     = ["82.43.64.101/32"]
+}
+
 variable "aws_region" {
   description = "AWS region to deploy into"
   type        = string
@@ -39,11 +45,4 @@ variable "private_subnet_cidrs" {
 variable "public_subnet_cidrs" {
   type = list(string)
   default = ["10.0.3.0/24","10.0.4.0/24"]
-}
-
-
-variable "allowed_ip_cidr" {
-  description = "CIDR blocks allowed for SSH and WAF"
-  type        = list(string)
-  default     = ["82.43.64.101/32"]
 }

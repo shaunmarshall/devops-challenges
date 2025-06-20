@@ -10,6 +10,7 @@ on:
       - main
 
 env:
+  ALLOWED_IPS: "82.43.64.101/32" 
   teffaform_apply: true
   deployment_tag: devops-challenge
 
@@ -20,6 +21,13 @@ jobs:
     steps:
     - name: Checkout repository
       uses: actions/checkout@v3
+
+    - name: Get Runner IP Address
+      id: get_ip
+      run: |
+        export RUNNER_IP="$(curl -s ifconfig.me)/32"
+        echo "Runner IP: $RUNNER_IP"
+        echo "ALLOWED_IPS="[\"$ALLOWED_IPS\",\"$RUNNER_IP\"]" >> $GITHUB_ENV
 
     - name: Set up AWS CLI
       uses: aws-actions/configure-aws-credentials@v2
@@ -41,9 +49,11 @@ jobs:
 
     - name: Apply Terraform deployment
       if: env.teffaform_apply
-      run: terraform apply -auto-approve tfplan
+      run: terraform apply -auto-approve tfplan -var "allowed_ip_cidr=${{ env.ALLOWED_IPS }}"
+    
     # Create SSH config file
     - name: Run create-ssh-config.sh
+      if: env.teffaform_apply
       run: |
         chmod +x ./scripts/create-ssh-config.sh
         ./scripts/create-ssh-config.sh

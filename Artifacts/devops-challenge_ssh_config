@@ -1,0 +1,27 @@
+
+Host app-server-2
+HostName 10.0.2.114
+	IdentityFile ././Artifacts/devops-challenge-private_key.pem
+User ec2-user 
+StrictHostKeyChecking no
+UserKnownHostsFile=/dev/null
+ProxyCommand ssh -q -W %h:%p -i ././Artifacts/devops-challenge-private_key.pem -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -p 22 -A ec2-user@ec2-3-253-105-74.eu-west-1.compute.amazonaws.com 
+
+
+Host bastion-host
+HostName 10.0.3.63
+	IdentityFile ././Artifacts/devops-challenge-private_key.pem
+User ec2-user 
+StrictHostKeyChecking no
+UserKnownHostsFile=/dev/null
+ProxyCommand ssh -q -W %h:%p -i ././Artifacts/devops-challenge-private_key.pem -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -p 22 -A ec2-user@ec2-3-253-105-74.eu-west-1.compute.amazonaws.com 
+
+
+Host app-server-1
+HostName 10.0.1.4
+	IdentityFile ././Artifacts/devops-challenge-private_key.pem
+User ec2-user 
+StrictHostKeyChecking no
+UserKnownHostsFile=/dev/null
+ProxyCommand ssh -q -W %h:%p -i ././Artifacts/devops-challenge-private_key.pem -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -p 22 -A ec2-user@ec2-3-253-105-74.eu-west-1.compute.amazonaws.com 
+
