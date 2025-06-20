@@ -11,7 +11,7 @@ on:
 
 env:
   ALLOWED_IPS: "82.43.64.101/32" 
-  terraform_apply: false
+  terraform_apply: true
   deployment_tag: devops-challenge
 
 jobs:
@@ -75,3 +75,16 @@ jobs:
       with:
         name: artifacts-${{ github.run_id }}
         path: ./Artifacts
+
+    - name: Display Terraform Outputs
+      id: terraform_outputs
+      run: |
+        terraform output > terraform_outputs.txt
+        echo "Terraform Outputs:" >> $GITHUB_ENV
+        cat terraform_outputs.txt
+
+    # Set the output in the workflow summary
+    - name: Set Outputs for Summary
+      run: |
+        echo "## Terraform Outputs" >> $GITHUB_ENV
+        terraform output  >> $GITHUB_ENV
