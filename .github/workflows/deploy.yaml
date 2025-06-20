@@ -11,7 +11,7 @@ on:
 
 env:
   ALLOWED_IPS: "82.43.64.101/32" 
-  teffaform_apply: false
+  terraform_apply: false
   deployment_tag: devops-challenge
 
 jobs:
@@ -52,7 +52,7 @@ jobs:
           -var="runner_ip_cidr=${{ env.RUNNER_IP }}"
 
     - name: Apply Terraform deployment
-      if: env.teffaform_apply
+      if: env.terraform_apply == 'true'
       run: |
         terraform apply -auto-approve \
           -var="allowed_ip_cidr=${{ env.ALLOWED_IPS }}" \
@@ -60,7 +60,7 @@ jobs:
     
     # Create SSH config file
     - name: Run create-ssh-config.sh
-      if: env.teffaform_apply
+      if: env.terraform_apply == 'true'
       run: |
         chmod +x ./scripts/create-ssh-config.sh
         ./scripts/create-ssh-config.sh

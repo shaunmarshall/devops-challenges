@@ -26,6 +26,7 @@ your chosen cloud. Do not deploy this infrastructure.
 - I have opted to use Terraform and Ansible as my IaC choice
 - Using GitHub Actions Workflow to deploy the AWS Infrastructure
 - **Infrastructure code will only deploy if env `terraform_apply` is set to true**
+- **Deployment requires a backend s3 bucket do be pre deployed to store the tfstae files**
 
 ## Manual Steps to deploy
 ### Step 1: Clone the Repository
