@@ -6,7 +6,7 @@
 deployment_tag="devops-challenge"
 aws_region=eu-west-1
 ec2_instance_user="ec2-user"
-private_ssh_key="./Artifacts/${deployment_tag}-private_key.pem"
+private_ssh_key="${deployment_tag}-private_key.pem"
 
 
 # change permission of ssh key 
