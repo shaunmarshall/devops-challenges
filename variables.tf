@@ -13,6 +13,7 @@ variable "allowed_ip_cidr" {
 variable "runner_ip_cidr" {
   description = "CIDR blocks allowed for SSH and WAF"
   type        = string
+  default     = "1.2.3.14/32"
 }
 
 variable "aws_region" {
