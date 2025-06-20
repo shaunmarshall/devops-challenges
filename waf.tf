@@ -5,7 +5,7 @@ resource "aws_wafv2_ip_set" "api_ips" {
   description       = "Allowed source IPs for API Gateway"
   scope             = "REGIONAL"
   ip_address_version = "IPV4"
-  addresses         = var.allowed_ip_cidr
+  addresses         = ["${var.allowed_ip_cidr}"]
 }
 
 
